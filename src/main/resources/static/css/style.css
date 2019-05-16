@@ -4,5 +4,6 @@ header{
 }
 
 .container{
-    text-align: center;
+    /*text-align: center;*/
+    width: 400px;
 }

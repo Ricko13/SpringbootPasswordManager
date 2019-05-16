@@ -6,22 +6,39 @@
 </head>
 <body>
 <div th:replace="template.html::navbar"></div>
-<div class="container">
+<div class="container" style="width: 400px;">
     <!--<div th:replace="template.html::header"></div>-->
 
-    <div th:if="${param.error}">
+    <div th:if="${param.error}" style="text-align: center">
         Invalid username or password.
     </div>
 
-    <div th:if="${param.logout}">
+    <div th:if="${param.logout}" style="text-align: center">
         You have been logged out.
     </div>
 
     <!--/login is set in MvcConfig class not in controllers classes-->
-    <form th:action="@{/login}" method="post">
-        <div><label> User Name : <input type="text" name="username"/> </label></div>
+    <!--<form th:action="@{/login}" method="post">
+        <div><label> User Name : <input type="text" name="username" autofocus="autofocus"/> </label></div>
         <div><label> Password: <input type="password" name="password"/> </label></div>
         <div><input type="submit" value="Sign In"/></div>
+    </form>-->
+
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Login</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" name="username" autofocus="autofocus">
+            <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+        </div>
+        <!--<div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>-->
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 
@@ -35,7 +52,7 @@
         </form>
     </div>-->
 
-    <div th:replace="template.html::footer"/>
+    <!--<div th:replace="template.html::footer"/>-->
 </div>
 
 </body>
