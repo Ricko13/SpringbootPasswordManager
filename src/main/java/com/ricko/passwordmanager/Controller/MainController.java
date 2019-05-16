@@ -52,7 +52,7 @@ public class MainController {
             model.addAttribute("error", "Error - couldn't add new position");
         }
 
-        return "/data/data";
+        return "redirect:/data";
     }
 
 

@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head th:replace="template.html::header">
+<head th:replace="template.html::head">
 </head>
 <body>
-
-<div class="container">
+<div th:replace="template.html::navbar"></div>
+<div class="container" >
 
     <div th:if="${param.success}">
         Added new possition succesfully
     </div>
 
-    <div>
+    <div style="text-align: center">
         <table class="dataTable">
             <tr>
                 <th>Name</th>
                 <th>Password</th>
             </tr>
+            <th:block th:each="position : ${data}">
+                <tr>
+                <td th:text="${position.website}"></td>
+                <td><button class="btn btn-light btn-sm" type="button" data-toggle="collapse" th:data-target="${'#'+position.website}" aria-expanded="false" aria-controls="collapseExample"><!--data-target="#collapseExample"-->
+                    show
+                </button>
+                    <div class="collapse"  th:id="${position.website}"> <!--id="collapseExample"-->
+                        <div class="card card-body" th:text="${position.password}">
+                            <!--Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.-->
+                        </div>
+                    </div>
+                </td>
+
+
+                </tr>
+
+            </th:block>
         </table>
     </div>
 

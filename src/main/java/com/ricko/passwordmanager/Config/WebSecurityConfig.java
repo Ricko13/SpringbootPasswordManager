@@ -53,6 +53,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .logout()
                     .permitAll();
+
+        /*DODAJ TO
+        .antMatchers("/", "/home").permitAll()
+        .antMatchers("/admin/**").access("hasRole('ADMIN')")*/
     }
     /*When a user successfully logs in, they will be redirected to the previously requested page that required authentication.
      There is a custom "/login" page specified by loginPage(), and everyone is allowed to view it.*/

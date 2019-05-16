@@ -6,9 +6,10 @@
     <title>Title</title>
 </head>
 <body>
+<div th:replace="template.html::navbar"></div>
 <div class="container">
     <div class="form">
-        <form action="#" method="post" th:action="@{/user/registration}" th:object="${userForm}">
+        <form  method="post" th:action="@{/user/registration}" th:object="${userForm}">
             <labal for="login">Login:</labal>
             <input type="text" id="login" th:field="*{username}"><br/>
 
@@ -16,7 +17,7 @@
             <input type="password"  id="password" th:field="*{password}"><br/>
 
             <label for="passwordConfirm">Confirm password</label>
-            <input type="password" id="passwordConfirm" th:fiels="*{passwordConfirm}"><br/>
+            <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}"><br/>
 
             <label for="name">Name:</label>
             <input type="text"  id="name" th:field="*{name}"><br/>

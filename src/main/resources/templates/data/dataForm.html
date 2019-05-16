@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head th:replace="template.html::header">
+<head th:replace="template.html::head">
 </head>
 <body>
-
+<div th:replace="template.html::navbar"></div>
 <div class="container">
-    <div class="form">
+    <div class="form" style="text-align: center">
         <form method="post" th:action="@{/data/add}">
             <label for="site">Name</label><br/>
             <input id="site" type="text" name="site"><br/>
