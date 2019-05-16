@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="template.html::header">
+</head>
+<body>
+
+<div class="container">
+
+    <div th:if="${param.success}">
+        Added new possition succesfully
+    </div>
+
+    <div>
+        <table class="dataTable">
+            <tr>
+                <th>Name</th>
+                <th>Password</th>
+            </tr>
+        </table>
+    </div>
+
+
+</div>
+
+<div th:replace="template.html::js-include"></div>
+</body>
+</html>

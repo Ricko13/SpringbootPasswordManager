@@ -1,8 +1,7 @@
 package com.ricko.passwordmanager.Repository;
 
+import com.ricko.passwordmanager.Model.Data;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called dataRepository

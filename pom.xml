@@ -75,6 +75,8 @@
 
 
 <!--SECURITY-->
+        <!--If Spring Security is in the project, then Spring Boot automatically
+        secures all HTTP endpoints with "basic" authentication.-->
         <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-security</artifactId>
@@ -89,6 +91,13 @@
             <artifactId>spring-security-config</artifactId>
             <version>5.1.5.RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+            <version>3.0.4.RELEASE</version>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>org.springframework.security</groupId>-->
             <!--<artifactId>spring-security-core</artifactId>-->

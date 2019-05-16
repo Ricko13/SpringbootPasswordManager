@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="template.html::header">
 </head>
 <body>
 
 <div class="container">
     <div class="form">
-        <form method="post" action="/data/add">
-            <input type="text" value="site name" name="site">
-            <input type="password" value="password" name="password">
+        <form method="post" th:action="@{/data/add}">
+            <label for="site">Name</label><br/>
+            <input id="site" type="text" name="site"><br/>
+            <label for="password">Password:</label><br/>
+            <input id="password" type="password" name="password">
             <input type="submit">
         </form>
     </div>

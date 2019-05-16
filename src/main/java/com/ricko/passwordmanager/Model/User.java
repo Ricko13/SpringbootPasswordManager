@@ -1,8 +1,8 @@
-package com.ricko.passwordmanager.Repository;
+package com.ricko.passwordmanager.Model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 //notes on the bottom
 
@@ -18,8 +18,11 @@ public class User {
     private String name;
     private String surname;
     private String email;
-    private String login;
+    private String username;
     private String password;
+    @Transient
+    private String passwordConfirm;
+    //private String role;
 
     @OneToMany(mappedBy = "user")
     private List<Data> data;
@@ -28,21 +31,28 @@ public class User {
         return data;
     }
 
+    public void addData(Data data){
+        this.data.add(data);
+    }
+
+    @ManyToMany
+    private Set<Role> roles;
+
     /*@OneToMany
     @JoinColumn(name="userId")
     List<Data> data=new ArrayList<>();*/
 
 
     /*The default constructor only exists for the sake of JPA. You won’t use it directly, so it is designated as protected.*/
-    protected User() {
+    public User() {
     }
 
     /*The other constructor is the one you’ll use to create instances of Customer to be saved to the database.*/
-    public User(String name, String surname, String email, String login, String password) {
+    public User(String name, String surname, String email, String username, String password) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.login = login;
+        this.username = username;
         this.password = password;
     }
 
@@ -78,12 +88,12 @@ public class User {
         this.email = email;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String login) {
+        this.username = login;
     }
 
     public String getPassword() {
@@ -94,6 +104,22 @@ public class User {
         this.password = password;
     }
 
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public void setRoles(Set<Role> roles){
+        this.roles=roles;
+    }
+
+    public Set<Role> getRoles(){
+        return roles;
+    }
+
 
     @Override
     public String toString() {
@@ -102,7 +128,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
-                ", login='" + login + '\'' +
+                ", login='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

@@ -1,4 +1,4 @@
-package com.ricko.passwordmanager.Repository;
+package com.ricko.passwordmanager.Model;
 
 import javax.persistence.*;
 
@@ -19,11 +19,17 @@ public class Data {
         return user;
     }*/
 
+    /*public Data(String website, String password, User user) {
+        this.website = website;
+        this.password = password;
+        this.user=user;
+    }*/
     public Data(String website, String password, User user) {
         this.website = website;
         this.password = password;
         this.user=user;
     }
+
 
     protected Data() {
     }

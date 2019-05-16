@@ -1,57 +1,64 @@
 package com.ricko.passwordmanager.Controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ricko.passwordmanager.Repository.Data;
-import com.ricko.passwordmanager.Repository.User;
-import com.ricko.passwordmanager.Repository.UserRepository;
+import com.ricko.passwordmanager.Model.User;
+import com.ricko.passwordmanager.Service.SecurityService;
+import com.ricko.passwordmanager.Service.UserService;
+import com.ricko.passwordmanager.Validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Optional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    UserRepository userRepo;
 
     @Autowired
-    ObjectMapper objectMapper; //do obsługi jsona
+    private UserService userService;
 
-    @GetMapping("")
-    @ResponseBody
-    public String getUsers() throws JsonProcessingException {
-        //StringBuilder sb=new StringBuilder();
-        /*for(User user:userRepo.findAll()){
-            sb.append(user.toString());
-        }*/
-        return objectMapper.writeValueAsString(userRepo.findAll());
+    @Autowired
+    private SecurityService securityService;
+
+    @Autowired
+    private UserValidator userValidator;
+
+    @GetMapping("/registration")
+    public String registration(Model model){
+        model.addAttribute("userForm",new User());
+        return "/user/registration";
     }
 
-    @GetMapping("/{id}")
-    @ResponseBody
-    public String getUserById(@PathVariable int id) throws JsonProcessingException {
-        return objectMapper.writeValueAsString(userRepo.findById(id));
+    @PostMapping("/registration")
+    public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult){
+        userValidator.validate(userForm,bindingResult);
+        if(bindingResult.hasErrors()){
+            return "/user/registration";
+        }
+        userService.save(userForm);//to samo działa
+        securityService.autoLogin(userForm.getUsername(),userForm.getPasswordConfirm());
+
+
+        return "redirect:";
+        //return "/test";
     }
 
-
-    @GetMapping("/{id}/data")
-    @ResponseBody
-    public String getDataByUser(@PathVariable int  id) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        //Optional<User> user=userRepo.findById(id);
-
-        User user=userRepo.findById(id).orElse(null);
-        if(user!=null)
-            return objectMapper.writeValueAsString(user.getData());
-        else
-            return "No user with id="+id;
+/*/login POST controller, it is provided by Spring Security so we dont need to write this*/
+    @GetMapping("/login")
+    public String login(Model model,String error, String logout){
+        if(error!=null)
+            model.addAttribute("error","Your username or password is invalid");
+        if(logout!=null)
+            model.addAttribute("message","You have been logged out succesfully");
+        return "/user/login";
     }
+
+    /*@GetMapping({"/","hello"})
+    public String welcome(Model model){
+        return "welcome";
+    }*/
+
+
 }

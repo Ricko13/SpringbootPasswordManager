@@ -1,16 +1,30 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head th:replace="template.html::head">
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<div class="container">
+
 
 <p>Welcome in password manager</p>
+<div class="button-group" sec:authorize="isAuthenticated()">
+    <p><h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]] !</h1></p>
+    <p><a href="/data">Show my passwords</a> </p>
+    <p><a href="/data/add">Add new position</a> </p>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</div>
 
-<p><a href="/login">Login</a></p>
-<p><a href="/register">Register</a></p>
+<!--<div class="button-group" sec:authorize="isAnonymous()">-->
+<div class="button-group" sec:authorize="!isFullyAuthenticated()">
+    <p><a href="/login">Login</a></p>
+    <p><a href="/registration">Register</a></p>
+</div>
 
-
+</div>
 </body>
 </html>
