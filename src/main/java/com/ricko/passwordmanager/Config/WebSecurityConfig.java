@@ -42,17 +42,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                    .antMatchers("/","/registration","/css/**","/js/**","/assets/**","/login").permitAll()
-                    .anyRequest().authenticated()
-                    .and()
-                .formLogin()
-                    .loginPage("/login")
-                    //.permitAll()//permitAll nie jest tutaj konieczne bo mozna wyzej w antMatchers dać
-                .defaultSuccessUrl("/")
-                    .and()
-                .logout()
-                    .permitAll();
+            .authorizeRequests()
+                .antMatchers("/","/registration","/css/**","/js/**","/assets/**","/login").permitAll()
+                .anyRequest().authenticated()
+                .and()
+            .formLogin()
+                .loginPage("/login")
+                //.permitAll()//permitAll nie jest tutaj konieczne bo mozna wyzej w antMatchers dać
+            .defaultSuccessUrl("/")
+                .and()
+            .logout()
+                .permitAll();
 
         /*DODAJ TO
         .antMatchers("/", "/home").permitAll()

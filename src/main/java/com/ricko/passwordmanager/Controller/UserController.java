@@ -2,6 +2,7 @@ package com.ricko.passwordmanager.Controller;
 
 
 import com.ricko.passwordmanager.Model.User;
+import com.ricko.passwordmanager.Repository.UserRepository;
 import com.ricko.passwordmanager.Service.SecurityService;
 import com.ricko.passwordmanager.Service.UserService;
 import com.ricko.passwordmanager.Validator.UserValidator;
@@ -31,18 +32,20 @@ public class UserController {
         return "/user/registration";
     }
 
+
+   /* @Autowired
+    UserRepository userRepo;*/
+
     @PostMapping("/registration")
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult){
         userValidator.validate(userForm,bindingResult);
         if(bindingResult.hasErrors()){
             return "/user/registration";
         }
-        userService.save(userForm);//to samo działa
+        userService.save(userForm);
         securityService.autoLogin(userForm.getUsername(),userForm.getPasswordConfirm());
 
-
         return "redirect:";
-        //return "/test";
     }
 
 /*/login POST controller, it is provided by Spring Security so we dont need to write this*/
