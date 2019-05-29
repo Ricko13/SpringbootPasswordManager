@@ -20,6 +20,8 @@ public class User {
     private String email;
     private String username;
     private String password;
+    private String confirmationToken;
+    private boolean enabled;
     @Transient
     private String passwordConfirm;
     //private String role;
@@ -118,6 +120,22 @@ public class User {
 
     public Set<Role> getRoles(){
         return roles;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
 

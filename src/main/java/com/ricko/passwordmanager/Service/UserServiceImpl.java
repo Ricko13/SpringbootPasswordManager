@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 //public class UserServiceImpl implements UserDetailsService {
 @Service
@@ -27,7 +28,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
-        user.setRoles(new HashSet<>(roleRepository.findAll())); // ALE CZEMU DAJE TUTAJ WSZYSTKIE ROLE Z BAZY? xd
+        //user.setRoles(new HashSet<>(roleRepository.findAll())); // ALE CZEMU DAJE TUTAJ WSZYSTKIE ROLE Z BAZY? xd
+
         userRepo.save(user);
     }
 
@@ -35,6 +37,8 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepo.findByUsername(username);
     }
+
+    public User findByConfirmationToken(String token){ return userRepo.findByConfirmationToken(token); }
 
 
     @Autowired

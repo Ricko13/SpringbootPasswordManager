@@ -11,7 +11,11 @@ public interface UserService {
 
     User findByUsername(String username);
 
+    User findByConfirmationToken(String token);
+
     void currentUserAddData(String site, String password) throws Exception;
 
     List<Data> getCurrentUserData();
+
+
 }

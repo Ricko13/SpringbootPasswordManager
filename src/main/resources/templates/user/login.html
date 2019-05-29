@@ -17,6 +17,17 @@
         You have been logged out.
     </div>
 
+    <div th:if="${confirmationMessage}" class="alert alert-success" role="alert" style="text-align: center">
+        Confirmation message has been send to your email address.
+    </div>
+
+    <div th:if="${confirmed}" class="alert alert-success" role="alert">
+        <p th:text="${confirmed}"></p>
+    </div>
+    <div th:if="${invalidToken}" class="alert alert-danger" role="alert">
+        Confirmation error
+    </div>
+
     <!--/login is set in MvcConfig class not in controllers classes-->
     <!--<form th:action="@{/login}" method="post">
         <div><label> User Name : <input type="text" name="username" autofocus="autofocus"/> </label></div>
@@ -24,7 +35,7 @@
         <div><input type="submit" value="Sign In"/></div>
     </form>-->
 
-    <form th:action="@{/login}" method="post">
+    <form th:action="@{/loginCheckpoint}" method="post">
         <div class="form-group">
             <label for="exampleInputEmail1">Login</label>
             <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" name="username" autofocus="autofocus">

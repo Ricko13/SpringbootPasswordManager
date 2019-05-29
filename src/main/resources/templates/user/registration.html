@@ -9,26 +9,34 @@
 <div th:replace="template.html::navbar"></div>
 <div class="container">
     <div class="form">
-        <form  method="post" th:action="@{/registration}" th:object="${userForm}">
-            <labal for="login">Login:</labal>
-            <input type="text" id="login" th:field="*{username}"><br/>
+        <form method="post" th:action="@{/registration}" th:object="${userForm}">
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" th:field="*{username}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" th:field="*{password}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="passwordConfirm">Confirm password</label>
+                <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" th:field="*{name}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" th:field="*{surname}" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" th:field="*{email}" class="form-control">
+            </div>
 
-            <label for="password">Password:</label>
-            <input type="password"  id="password" th:field="*{password}"><br/>
-
-            <label for="passwordConfirm">Confirm password</label>
-            <input type="password" id="passwordConfirm" th:field="*{passwordConfirm}"><br/>
-
-            <label for="name">Name:</label>
-            <input type="text"  id="name" th:field="*{name}"><br/>
-
-            <label for="surname">Surname:</label>
-            <input type="text"  id="surname" th:field="*{surname}"><br/>
-
-            <label for="email">Email:</label>
-            <input type="text"  id="email" th:field="*{email}"><br/>
-
-            <input type="submit" value="Submit"/>
+            <!--<input type="submit" value="Submit"/>-->
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
