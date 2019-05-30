@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.crypto.Cipher;
+
 @Controller
 public class MainController {
     // This means to get the bean called userRepository
@@ -17,6 +19,7 @@ public class MainController {
 
     @Autowired
     private DataRepository dataRepo;
+
 
 
     @GetMapping("/data")

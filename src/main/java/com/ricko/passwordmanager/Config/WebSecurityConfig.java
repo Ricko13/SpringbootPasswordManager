@@ -15,7 +15,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
+import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
 import javax.persistence.OrderBy;
+import java.security.NoSuchAlgorithmException;
 
 @Configuration
 @EnableWebSecurity
@@ -34,6 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+
+
 /*The configure(HttpSecurity) method defines which URL paths should be secured and which should not. Specifically,
  the "/" and "/home" paths are configured to not require any authentication. All other paths must be authenticated.*/
 
@@ -43,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/","/registration","/css/**","/js/**","/assets/**","/login", "/confirm", "loginCheckpoint").permitAll()
+                .antMatchers("/","/registration","/css/**","/js/**","/assets/**","/login", "/confirm", "/loginCheckpoint").permitAll()
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

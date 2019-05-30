@@ -8,6 +8,7 @@
 <body>
 <div th:replace="template.html::navbar"></div>
 <div class="container">
+    <br/><header><h3>Registration</h3></header>
     <div class="form">
         <form method="post" th:action="@{/registration}" th:object="${userForm}">
             <div class="form-group">

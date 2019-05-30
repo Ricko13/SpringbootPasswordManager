@@ -8,7 +8,7 @@
 <div th:replace="template.html::navbar"></div>
 <div class="container" style="width: 400px;">
     <!--<div th:replace="template.html::header"></div>-->
-
+    <br/><header><h3>Login page</h3></header>
     <div th:if="${param.error}" style="text-align: center">
         Invalid username or password.
     </div>
@@ -24,9 +24,14 @@
     <div th:if="${confirmed}" class="alert alert-success" role="alert">
         <p th:text="${confirmed}"></p>
     </div>
-    <div th:if="${invalidToken}" class="alert alert-danger" role="alert">
-        Confirmation error
+    <div th:if="${messageError}" class="alert alert-danger" role="alert">
+        <p th:text="${messageError}">danger</p>
     </div>
+
+    <div th:if="${messageWarning}" class="alert alert-warning" role="alert" >
+        <p th:text="${messageWarning}">warning</p>
+    </div>
+
 
     <!--/login is set in MvcConfig class not in controllers classes-->
     <!--<form th:action="@{/login}" method="post">

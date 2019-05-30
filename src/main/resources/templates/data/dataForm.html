@@ -6,13 +6,20 @@
 <body>
 <div th:replace="template.html::navbar"></div>
 <div class="container">
+    <br/><header><h3>Add new position</h3></header>
     <div class="form" style="text-align: center">
         <form method="post" th:action="@{/data/add}">
-            <label for="site">Name</label><br/>
-            <input id="site" type="text" name="site"><br/>
-            <label for="password">Password:</label><br/>
-            <input id="password" type="password" name="password">
-            <input type="submit">
+
+            <div class="form-group">
+            <!--<label for="site">Name</label><br/>-->
+            <input class="form-control" id="site" type="text" name="site" autofocus="autofocus" placeholder="Name">
+            </div>
+
+            <div class="form-group">
+            <!--<label for="password">Password:</label><br/>-->
+            <input class="form-control" id="password" type="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 </div>

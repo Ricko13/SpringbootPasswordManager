@@ -9,15 +9,17 @@
 
 <div th:replace="template.html::navbar"></div>
 <div class="container">
+    <br/>
+<header><h2>Welcome in password manager</h2></header>
 
-
-<p>Welcome in password manager</p>
 <div class="button-group" sec:authorize="isAuthenticated()">
-    <p><h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]] !</h1></p>
+    <!--<p th:if="${loggedIn}"><h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]] !</h1></p>-->
+    <div th:if="${loggedIn}" class="alert alert-success" role="alert"><h5 th:text="${loggedIn}">Hello [[${#httpServletRequest.remoteUser}]] !</h5></div>
     <p><a href="/data">Show my passwords</a> </p>
     <p><a href="/data/add">Add new position</a> </p>
     <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
+        <!--<input type="submit" value="Sign Out"/>-->
+        <button type="submit" class="btn btn-primary">Sign out</button>
     </form>
 </div>
 

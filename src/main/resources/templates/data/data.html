@@ -6,17 +6,21 @@
 <body>
 <div th:replace="template.html::navbar"></div>
 <div class="container" >
-
+    <br/><header><h3>My passwords</h3></header>
     <div th:if="${param.success}">
         Added new possition succesfully
     </div>
 
     <div style="text-align: center">
+        <!--<table class="dataTable">-->
         <table class="dataTable">
+            <thead>
             <tr>
                 <th>Name</th>
                 <th>Password</th>
             </tr>
+            </thead>
+            <tbody>
             <th:block th:each="position : ${data}">
                 <tr>
                 <td th:text="${position.website}"></td>
@@ -34,6 +38,7 @@
                 </tr>
 
             </th:block>
+            </tbody>
         </table>
     </div>
 
