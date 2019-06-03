@@ -13,6 +13,8 @@ public interface UserService {
 
     User findByConfirmationToken(String token);
 
+    User findByEmail(String email);
+
     void currentUserAddData(String site, String password) throws Exception;
 
     List<Data> getCurrentUserData();

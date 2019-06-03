@@ -15,6 +15,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     //UTWORZENIE WŁASNEJ METODY - wyszukiwania po nazwisku czy loginie
     User findByUsername(String username);                                                   /*WYWALA SIĘ BO MAM WIĘCEJ NIŻ JEDNEGO UŻYTKOWNIKA Z DANYM USERNAME*/  //ALBO GDY NIE MA TAKIEGO UZYTKOWNIKA
     User findByConfirmationToken(String confirmationToken);
+    User findByEmail(String email);
     List<User> findBySurname(String surname);
 
 }

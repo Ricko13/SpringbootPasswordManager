@@ -44,7 +44,7 @@ public class UserController {
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-        return "/user/registration";
+        return "user/registration";
     }
 
    /* @Autowired
@@ -80,22 +80,17 @@ public class UserController {
     @GetMapping("/confirm")
     public String showConfirmationPage(Model model, @RequestParam("token") String token) {
         User user = userService.findByConfirmationToken(token);
-        //registerValidator.checkTokenAndSetMessage( modelAndView, user );
         if (user == null) {
-            //modelAndView.addObject("invalidToken", "You opened invalid confirmation link. ");
             model.addAttribute("messageError", "You opened invalid confirmation link. ");
         } else {
             user.setEnabled(true);
             user.setConfirmationToken(null);
-            //userRepo.save(user);
             if (user.isEnabled() == true)
                 model.addAttribute("confirmed", "Your account has been activated seccessfully, you can sign in now.");
             else
                 model.addAttribute("confirmed", "gówno");
         }
-        return "/user/login";
-        //modelAndView.setViewName( "/login" );
-        //return modelAndView;
+        return "user/login";
     }
 
     /*/login POST controller, it is provided by Spring Security so we dont need to write this*/
@@ -105,7 +100,7 @@ public class UserController {
             model.addAttribute("error", "Your username or password is invalid");
         if (logout != null)
             model.addAttribute("message", "You have been logged out succesfully");
-        return "/user/login";
+        return "user/login";
     }
 
     @PostMapping("/loginCheckpoint")
@@ -115,21 +110,21 @@ public class UserController {
         User user = userService.findByUsername(username);
         if (user == null) {
             model.addAttribute("messageError", "Invalid username or password");
-            return "/user/login";
+            return "user/login";
         } else if (!encoder.matches(password,user.getPassword())) {
             emailService.sendEmail(emailService.createFailedLoginEmail(user, request));
             model.addAttribute("messageError", "Invalid username or password");
-            return "/user/login";
+            return "user/login";
         } else if (user.isEnabled() == false) {
             model.addAttribute("messageWarning", "You have to confirm your email address before signing in");
-            return "/user/login";
+            return "user/login";
         } else {
 
-            //emailService.sendEmail(emailService.createLogingInfoEmail(user, request));
+            emailService.sendEmail(emailService.createLogingInfoEmail(user, request));
 
             securityService.autoLogin(username, password);
             model.addAttribute("loggedIn", "Signed in user " + username);
-            return "/index";
+            return "index";
         }
 
 

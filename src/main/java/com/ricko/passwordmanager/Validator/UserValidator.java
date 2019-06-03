@@ -30,23 +30,25 @@ public class UserValidator implements Validator {
             errors.rejectValue("username", "Duplicate.userForm.username");
         }
 
-        /*ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        if (user.getUsername().length() < 8 || user.getUsername().length() > 32) {
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
+        if (user.getUsername().length() < 4 || user.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.userForm.username");
         }
 
-        //DAJ WERYFIKACJE CZY TAKI EMAIL ISTNIEJE W BAZIE
-
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
+
         if (user.getPassword().length() < 8 || user.getPassword().length() > 32) {
             errors.rejectValue("password", "Size.userForm.password");
-        }*/
+        }
 
+        /*if(userService.findByEmail(user.getEmail())!=null){
+            errors.rejectValue("email", "Duplicate.userForm.email");
+        }*/
 
         /*DODAJ POTWIERDZANIE HASLA, mailem tez nie zaszkodzi xddd*/
-        /*if (!user.getPasswordConfirm().equals(user.getPassword())) {
+        if (!user.getPasswordConfirm().equals(user.getPassword())) {
             errors.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
-        }*/
+        }
     }
 }

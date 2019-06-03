@@ -1,5 +1,6 @@
 package com.ricko.passwordmanager.Service;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.ricko.passwordmanager.Model.Data;
 import com.ricko.passwordmanager.Repository.DataRepository;
 import com.ricko.passwordmanager.Repository.RoleRepository;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    @Autowired
+    private EncryptionService encryptionService;
+
     @Override
     public void save(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
@@ -38,7 +42,14 @@ public class UserServiceImpl implements UserService {
         return userRepo.findByUsername(username);
     }
 
-    public User findByConfirmationToken(String token){ return userRepo.findByConfirmationToken(token); }
+    public User findByConfirmationToken(String token){
+        return userRepo.findByConfirmationToken(token);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
 
 
     @Autowired
@@ -49,13 +60,18 @@ public class UserServiceImpl implements UserService {
     public void currentUserAddData(String site, String password) throws Exception {
         User user=securityService.getLoggedInUser();
         if(user!=null)
-            dataRepository.save(new Data(site,password,user));
+            dataRepository.save(new Data(site,encryptionService.encode(password),user));
         else
             throw new Exception();
     }
 
     public List<Data> getCurrentUserData(){
-        return securityService.getLoggedInUser().getData();
+        List<Data> data=securityService.getLoggedInUser().getData();
+        for(Data item : data) {
+            String pass=encryptionService.decode(item.getPassword());
+            item.setPassword(pass);
+        }
+        return data;
     }
 
     /*@Override

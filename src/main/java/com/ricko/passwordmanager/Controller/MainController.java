@@ -28,7 +28,7 @@ public class MainController {
             model.addAttribute("success","New position added succesfully");
 
         model.addAttribute("data",userService.getCurrentUserData());
-        return "/data/data";
+        return "data/data";
     }
 
     @GetMapping("/data/add")

@@ -46,7 +46,7 @@ public class AdminController {
 
         String username=securityService.findLoggedInUsername();
         if(username==null)
-            return "kurwa jebana null";
+            return "null";
 
         //return securityService.getLoggedInUser().getUsername();
         return username;
